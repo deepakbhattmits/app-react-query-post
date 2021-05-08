@@ -13,7 +13,11 @@ const Posts = () => {
   const [createPost, createPostInfo] = useMutation(
     (values) => axios.post('/api/posts', values),
     {
-      // onSuccess: () => {
+      onMutate: (values) => {
+        queryCache.setQueryData('posts', (oldPosts) => {
+          return [...oldPosts, { ...values, id: Date.now() }]
+        })
+      }, // onSuccess: () => {
       //   queryCache.invalidateQueries('posts')
       // },
       onError: (error) => {
@@ -72,9 +76,9 @@ const Posts = () => {
                 : 'Create Post'
             }
           />
-          {createPostInfo.isError ? (
-            <pre>{createPostInfo.error.response.data.message}</pre>
-          ) : null}
+          {/* {createPostInfo.isError ? (
+            <pre>{createPostInfo.error.response.data?.message}</pre>
+          ) : null} */}
         </div>
       </div>
       <style jsx>{`
