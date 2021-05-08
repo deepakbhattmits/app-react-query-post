@@ -1,4 +1,7 @@
 import { Link, useParams, useNavigate } from 'react-router-dom'
+
+import { queryCache, useMutation } from 'react-query'
+import axios from 'axios'
 import Button from '../../components/reusable/Button'
 
 // hooks
@@ -15,7 +18,27 @@ const Post = () => {
   const navigate = useNavigate()
 
   const postQuery = usePost(postId)
-  const [savePost, savePostInfo] = useSavePost()
+  // const [savePost, savePostInfo] = useSavePost()
+
+  const [savePost, savePostInfo] = useMutation(
+    (values) =>
+      axios.patch(`/api/posts/${values.id}`, values).then((res) => res.data),
+    {
+      onSuccess: (data, values) => {
+        // console.log('DATA : ', data)
+        queryCache.setQueryData(['post', values.id], data)
+        queryCache.invalidateQueries(['post', values.id])
+      },
+      onError: (error) => {
+        console.log('ERROR : ', error)
+        // alert(error.response.data.message)
+      },
+      // onSettled: (data, error) => {
+      //   queryCache.invalidateQueries(['post', data.id])
+      // },
+    }
+  )
+
   const [deletePost, deletePostInfo] = useDeletePost()
 
   const onSubmit = async (values) => {
