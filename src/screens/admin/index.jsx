@@ -1,35 +1,12 @@
 import { Link } from 'react-router-dom'
-import { queryCache, useMutation } from 'react-query'
-import axios from 'axios'
-
 import PostForm from '../../components/PostForm'
 import { Loader } from '../../components/styled'
 import usePosts from '../../hooks/usePosts'
-// import useCreatePost from '../../hooks/useCreatePost'
+import useCreatePost from '../../hooks/useCreatePost'
 
 const Posts = () => {
   const postsQuery = usePosts()
-  // const [createPost, createPostInfo] = useCreatePost()
-  const [createPost, createPostInfo] = useMutation(
-    (values) => axios.post('/api/posts', values),
-    {
-      onMutate: (values) => {
-        queryCache.setQueryData('posts', (oldPosts) => {
-          return [...oldPosts, { ...values, id: Date.now() }]
-        })
-      }, // onSuccess: () => {
-      //   queryCache.invalidateQueries('posts')
-      // },
-      onError: (error) => {
-        console.log('ERROR : ', error)
-        // alert(error.response.data.message)
-      },
-      onSettled: () => {
-        queryCache.invalidateQueries('posts')
-      },
-    }
-  )
-
+  const [createPost, createPostInfo] = useCreatePost()
   const onSubmit = async (values) => {
     await createPost(values)
     // after add success load updated data
@@ -77,7 +54,7 @@ const Posts = () => {
             }
           />
           {/* {createPostInfo.isError ? (
-            <pre>{createPostInfo.error.response.data?.message}</pre>
+            <pre>{createPostInfo.error.response?.data}</pre>
           ) : null} */}
         </div>
       </div>
