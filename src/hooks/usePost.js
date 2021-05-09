@@ -1,30 +1,36 @@
-import { useReducer, useCallback, useEffect } from 'react'
-import axios from 'axios'
+import { useReducer, useCallback, useEffect } from 'react';
+import axios from 'axios';
 
 export const fetchPost = (postId) =>
-  axios.get(`/api/posts/${postId}`).then((res) => res.data)
+  axios.get(`/api/posts/${postId}`).then((res) => res.data);
 
 export default function usePost(postId) {
   const [state, setState] = useReducer((_, action) => action, {
     isLoading: true,
-  })
+  });
 
   const fetch = useCallback(async () => {
-    setState({ isLoading: true })
+    setState({ isLoading: true });
     try {
-      const data = await fetchPost(postId)
-      setState({ isSuccess: true, data })
+      const data = await fetchPost(postId);
+      setState({ isSuccess: true, data });
     } catch (error) {
-      setState({ isError: true, error })
+      setState({ isError: true, error });
     }
-  }, [postId])
+  }, [postId]);
 
   useEffect(() => {
-    fetch()
-  }, [fetch])
+    let unmounted = false;
+    if (!unmounted) {
+      fetch();
+    }
+    return () => {
+      unmounted = true;
+    };
+  }, []);
 
   return {
     ...state,
     fetch,
-  }
+  };
 }
