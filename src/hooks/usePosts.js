@@ -17,7 +17,13 @@ export default function usePosts() {
   }
 
   useEffect(() => {
-    fetch()
+    let unmounted = false
+    if (!unmounted) {
+      fetch()
+    }
+    return () => {
+      unmounted = true
+    }
   }, [])
 
   return {
