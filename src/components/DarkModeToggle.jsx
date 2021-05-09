@@ -9,13 +9,20 @@ const DarkModeToggle = () => {
   }
 
   useEffect(() => {
+    let unmounted = false
     const root = window.document.documentElement
     const initialColorValue = root.style.getPropertyValue(
       '--initial-color-mode'
     )
     // console.log('init', initialColorValue);
 
-    setDarkTheme(initialColorValue === 'dark')
+    if (!unmounted) {
+      setDarkTheme(initialColorValue === 'dark')
+    }
+
+    return () => {
+      unmounted = true
+    }
   }, [])
   useEffect(() => {
     if (darkTheme !== undefined) {
