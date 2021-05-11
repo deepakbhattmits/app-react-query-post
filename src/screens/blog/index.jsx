@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 //
-import usePosts from '../../hooks/usePosts'
-import { PostStyles } from '../../components/styled'
+import usePosts from '../../hooks/usePosts';
+import { PostStyles } from '../../components/styled';
 
 const Home = () => {
-  const postsQuery = usePosts()
+  const postsQuery = usePosts();
 
   return (
     <>
@@ -31,6 +31,6 @@ const Home = () => {
         )}
       </div>
     </>
-  )
-}
-export default Home
+  );
+};
+export default Home;
