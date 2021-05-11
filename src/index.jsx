@@ -1,24 +1,24 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { ReactQueryDevtools } from 'react-query-devtools'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ReactQueryDevtools } from 'react-query-devtools';
 //
 
-import { Wrapper, Main } from './components/styled'
-import Sidebar from './components/Sidebar'
+import { Wrapper, Main } from './components/styled';
+import Sidebar from './components/Sidebar';
 
-import Admin from './screens/admin'
-import AdminPost from './screens/admin/Post'
-import Blog from './screens/blog'
-import BlogPost from './screens/blog/Post'
-import DarkModeToggle from './components/DarkModeToggle'
+import Admin from './screens/admin';
+import AdminPost from './screens/admin/Post';
+import Blog from './screens/blog';
+import BlogPost from './screens/blog/Post';
+import DarkModeToggle from './components/DarkModeToggle';
 
 const SafeHydrate = ({ children }) => {
   return (
     <div suppressHydrationWarning>
       {typeof document === 'undefined' ? null : children}
     </div>
-  )
-}
-const App = () => {
+  );
+};
+export default function App() {
   return (
     <SafeHydrate>
       <BrowserRouter>
@@ -45,6 +45,6 @@ const App = () => {
         </Wrapper>
       </BrowserRouter>
     </SafeHydrate>
-  )
+  );
 }
-export default App
+// export default App
