@@ -1,17 +1,17 @@
-import { Link } from 'react-router-dom'
-import PostForm from '../../components/PostForm'
-import { Loader } from '../../components/styled'
-import usePosts from '../../hooks/usePosts'
-import useCreatePost from '../../hooks/useCreatePost'
+import { Link } from 'react-router-dom';
+import PostForm from '../../components/PostForm';
+import { Loader } from '../../components/styled';
+import usePosts from '../../hooks/usePosts';
+import useCreatePost from '../../hooks/useCreatePost';
 
 const Posts = () => {
-  const postsQuery = usePosts()
-  const [createPost, createPostInfo] = useCreatePost()
+  const postsQuery = usePosts();
+  const [createPost, createPostInfo] = useCreatePost();
   const onSubmit = async (values) => {
-    await createPost(values)
+    await createPost(values);
     // after add success load updated data
-    postsQuery.fetch()
-  }
+    postsQuery.fetch();
+  };
 
   return (
     <section>
@@ -66,6 +66,6 @@ const Posts = () => {
         }
       `}</style>
     </section>
-  )
-}
-export default Posts
+  );
+};
+export default Posts;
