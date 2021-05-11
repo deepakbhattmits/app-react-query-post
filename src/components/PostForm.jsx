@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
-import Button from '../components/reusable/Button'
+import { useState, useEffect, useCallback } from 'react';
+import Button from '../components/reusable/Button';
 
 const defaultFormValues = {
   title: '',
   body: '',
-}
+};
 
 const PostForm = ({
   onSubmit,
@@ -13,28 +13,31 @@ const PostForm = ({
   clearOnSubmit,
   children,
 }) => {
-  const [values, setValues] = useState(initialValues)
+  const [values, setValues] = useState(initialValues);
 
   const setValue = (field, value) =>
-    setValues((old) => ({ ...old, [field]: value }))
+    setValues((old) => ({ ...old, [field]: value }));
 
-  const handleSubmit = (e) => {
-    if (clearOnSubmit) {
-      setValues(defaultFormValues)
-    }
-    e.preventDefault()
-    onSubmit(values)
-  }
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (clearOnSubmit) {
+        setValues(defaultFormValues);
+      }
+      onSubmit(values);
+    },
+    [values]
+  );
 
   useEffect(() => {
-    let unmounted = false
+    let unmounted = false;
     if (!unmounted) {
-      setValues(initialValues)
+      setValues(initialValues);
     }
     return () => {
-      unmounted = true
-    }
-  }, [initialValues])
+      unmounted = true;
+    };
+  }, [initialValues]);
 
   return (
     <form onSubmit={handleSubmit} className="ui form">
@@ -85,6 +88,6 @@ const PostForm = ({
         }
       `}</style>
     </form>
-  )
-}
-export default PostForm
+  );
+};
+export default PostForm;
