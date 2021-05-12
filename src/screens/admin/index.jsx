@@ -1,17 +1,19 @@
+import { useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import PostForm from '../../components/PostForm';
 import { Loader } from '../../components/styled';
+// Hooks
 import usePosts from '../../hooks/usePosts';
 import useCreatePost from '../../hooks/useCreatePost';
 
 const Posts = () => {
   const postsQuery = usePosts();
   const [createPost, createPostInfo] = useCreatePost();
-  const onSubmit = async (values) => {
+  const onSubmit = useCallback(async (values) => {
     await createPost(values);
     // after add success load updated data
     postsQuery.fetch();
-  };
+  }, []);
 
   return (
     <section>
@@ -24,13 +26,15 @@ const Posts = () => {
           ) : (
             <>
               <h3>Posts</h3>
-              <ul>
+              <div className="ui list ordered">
                 {postsQuery.data.map((post) => (
-                  <li key={post.id}>
-                    <Link to={`./${post.id}`}>{post.title}</Link>
-                  </li>
+                  <div className="item" key={post.id}>
+                    <div className="">
+                      <Link to={`./${post.id}`}>{post.title}</Link>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
               <br />
             </>
           )}
