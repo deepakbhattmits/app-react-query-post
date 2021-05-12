@@ -1,32 +1,31 @@
 /** @format */
 
 :root {
-	--color-description: #000000ad;
-	--color-meta: #00000066;
-	--color-btn-background: #7726ed;
-	--color-primary-accent: #5b34da;
-	--color-primary: #000;
-	--color-background: #fff;
-	--color-secondary-accent: #358ef1;
+  --color-description: #000000ad;
+  --color-meta: #00000066;
+  --color-btn-background: #7726ed;
+  --color-primary-accent: #5b34da;
+  --color-primary: #000;
+  --color-background: #fff;
+  --color-secondary-accent: #358ef1;
 }
 
 [data-theme='dark'] {
-	--color-meta: invert(#03020266);
-	--color-description: invert(#000000ad);
-	--color-btn-background: #7726ed;
-	--color-primary-accent: #9d86e9;
-	--color-secondary-accent: #61dafb;
-	--color-primary: #fff;
-	--color-background: #000;
+  --color-meta: invert(#03020266);
+  --color-description: invert(#000000ad);
+  --color-btn-background: #7726ed;
+  --color-primary-accent: #9d86e9;
+  --color-secondary-accent: #61dafb;
+  --color-primary: #fff;
+  --color-background: #000;
 }
 
 [data-theme='batman'] {
-	--color-primary-accent: #ffff00;
+  --color-primary-accent: #ffff00;
 }
 body {
-	background-color: var(--color-background);
-	color: var(--color-primary);
-	overflow: hidden;
-	height: calc(100vh);
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  overflow: hidden;
+  height: calc(100vh);
 }
-
