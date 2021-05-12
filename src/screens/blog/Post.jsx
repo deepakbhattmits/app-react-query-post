@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
 import { useParams } from 'react-router-dom';
-
-//
-
+// Hooks
 import usePost from '../../hooks/usePost';
+import Button from '../../components/reusable/Button';
 
 const Post = () => {
   const router = useRouter();
@@ -18,9 +17,14 @@ const Post = () => {
         postQuery.error.message
       ) : (
         <div>
-          <button className="ui button" onClick={() => router.back()}>
+          <Button
+            type="button"
+            className="inverted blue"
+            onClick={() => router.back()}
+          >
+            <i className="hand point left outline icon"></i>
             Back
-          </button>
+          </Button>
           <h2>{postQuery.data.title}</h2>
           <p>{postQuery.data.body}</p>
         </div>
