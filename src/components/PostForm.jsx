@@ -30,13 +30,7 @@ const PostForm = ({
   );
 
   useEffect(() => {
-    let unmounted = false;
-    if (!unmounted) {
-      setValues(initialValues);
-    }
-    return () => {
-      unmounted = true;
-    };
+    setValues(initialValues);
   }, [initialValues]);
 
   return (
