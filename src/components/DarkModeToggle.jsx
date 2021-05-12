@@ -1,40 +1,37 @@
 /** @format */
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 const DarkModeToggle = () => {
-  const [darkTheme, setDarkTheme] = useState(undefined)
+  const [darkTheme, setDarkTheme] = useState(undefined);
 
   const handleToggle = (event) => {
-    setDarkTheme(event.target.checked)
-  }
+    setDarkTheme(event.target.checked);
+  };
 
   useEffect(() => {
-    let unmounted = false
-    const root = window.document.documentElement
+    let unmounted = false;
+    const root = window.document.documentElement;
     const initialColorValue = root.style.getPropertyValue(
       '--initial-color-mode'
-    )
-    // console.log('init', initialColorValue);
-
+    );
     if (!unmounted) {
-      setDarkTheme(initialColorValue === 'dark')
+      setDarkTheme(initialColorValue === 'dark');
     }
-
     return () => {
-      unmounted = true
-    }
-  }, [])
+      unmounted = true;
+    };
+  }, []);
   useEffect(() => {
     if (darkTheme !== undefined) {
       if (darkTheme) {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        window.localStorage.setItem('theme', 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark');
+        window.localStorage.setItem('theme', 'dark');
       } else {
-        document.documentElement.removeAttribute('data-theme')
-        window.localStorage.setItem('theme', 'light')
+        document.documentElement.removeAttribute('data-theme');
+        window.localStorage.setItem('theme', 'light');
       }
     }
-  }, [darkTheme])
+  }, [darkTheme]);
 
   return (
     <>
@@ -146,6 +143,6 @@ const DarkModeToggle = () => {
 				
 			`}</style>
     </>
-  )
-}
-export default DarkModeToggle
+  );
+};
+export default DarkModeToggle;
