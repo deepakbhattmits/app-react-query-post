@@ -1,8 +1,7 @@
+import { useCallback } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Button from '../../components/reusable/Button';
-
-// hooks
-
+// Hooks
 import usePost from '../../hooks/usePost';
 import useSavePost from '../../hooks/useSavePost';
 import useDeletePost from '../../hooks/useDeletePost';
@@ -17,15 +16,18 @@ const Post = () => {
   const postQuery = usePost(postId);
   const [savePost, savePostInfo] = useSavePost();
   const [deletePost, deletePostInfo] = useDeletePost();
-  const onSubmit = async (values) => {
-    await savePost(values);
-    postQuery.fetch();
-  };
+  const onSubmit = useCallback(
+    async (values) => {
+      await savePost(values);
+      postQuery.fetch();
+    },
+    [postQuery, savePost]
+  );
 
-  const onDelete = async () => {
+  const onDelete = useCallback(async () => {
     await deletePost(postId);
     navigate('/admin');
-  };
+  }, [deletePost, navigate, postId]);
 
   return (
     <>
@@ -53,6 +55,7 @@ const Post = () => {
             }
           >
             <Button
+              type="button"
               onClick={onDelete}
               className="ui button red three wide column"
             >
