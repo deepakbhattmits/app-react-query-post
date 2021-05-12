@@ -1,23 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
-import { SidebarStyles } from './styled'
+import { SidebarStyles, PostListStyles } from './styled';
 
-const Sidebar = () => {
-  return (
-    <SidebarStyles>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/blog">Blog</Link>
-        </li>
-        <hr />
-        <li>
-          <Link to="/admin">Admin</Link>
-        </li>
-      </ul>
-    </SidebarStyles>
-  )
-}
-export default Sidebar
+const Sidebar = () => (
+  <SidebarStyles>
+    <div className="ui list navigation">
+      {[' ', 'Blog', 'Admin'].map((el, i) => (
+        <Link className="item" to={`/${el}`} key={i}>
+          <PostListStyles>{el.includes(' ') ? 'Home' : el}</PostListStyles>
+        </Link>
+      ))}
+    </div>
+  </SidebarStyles>
+);
+
+export default Sidebar;
