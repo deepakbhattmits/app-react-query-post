@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-//
+// Hooks
 import usePosts from '../../hooks/usePosts';
 import { PostStyles } from '../../components/styled';
 
