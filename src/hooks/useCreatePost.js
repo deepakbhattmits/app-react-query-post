@@ -1,22 +1,7 @@
-// import { useReducer, useCallback } from 'react'
-import { queryCache, useMutation } from 'react-query'
-import axios from 'axios'
+import { queryCache, useMutation } from 'react-query';
+import axios from 'axios';
 
 export default function useCreatePost() {
-  // const [state, setState] = useReducer((_, action) => action, {
-  //   isIdle: true,
-  // })
-
-  // const mutate = useCallback(async (values) => {
-  //   setState({ isLoading: true })
-  //   try {
-  //     const data = axios.post('/api/posts', values).then((res) => res.data)
-  //     setState({ isSuccess: true, data })
-  //   } catch (error) {
-  //     setState({ isError: true, error })
-  //   }
-  // }, [])
-  // return [mutate, state]
   const [createPost, createPostInfo] = useMutation(
     (values) => axios.post('/api/posts', values),
     {
@@ -28,8 +13,10 @@ export default function useCreatePost() {
         //   return [...oldPosts, { ...values, id: Date.now() }]
         // })
         // return queryCache.setQueryData('posts', oldPosts)
-      }, // onSuccess: () => {
-      //   queryCache.invalidateQueries('posts')
+      },
+      // onSuccess: (data, values) => {
+      //   queryCache.setQueryData('posts', data);
+      //   queryCache.invalidateQueries('posts');
       // },
       onError: (error, values, rollbackValue) => {
         // console.log('ERROR : ', error)
@@ -37,9 +24,9 @@ export default function useCreatePost() {
         // alert(error.response.data.message)
       },
       onSettled: () => {
-        queryCache.invalidateQueries('posts')
+        queryCache.invalidateQueries('posts');
       },
     }
-  )
-  return [createPost, createPostInfo]
+  );
+  return [createPost, createPostInfo];
 }
