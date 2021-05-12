@@ -18,7 +18,7 @@ const SafeHydrate = ({ children }) => {
     </div>
   );
 };
-export default function App() {
+const App = () => {
   return (
     <SafeHydrate>
       <BrowserRouter>
@@ -46,5 +46,5 @@ export default function App() {
       </BrowserRouter>
     </SafeHydrate>
   );
-}
-// export default App
+};
+export default App;
